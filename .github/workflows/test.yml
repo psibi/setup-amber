@@ -12,6 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        include:
         - os: ubuntu-latest
         - os: windows-latest
         - os: macos-latest
@@ -26,6 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        include:
         - os: ubuntu-latest
         - os: windows-latest
         - os: macos-latest
