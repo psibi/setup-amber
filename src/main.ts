@@ -87,12 +87,8 @@ export function getAmberForMachine(releases: Release[]): Release | null {
 }
 
 async function handleBadBinaryPermissions(file: string): Promise<void> {
-  try {
-    await fs.access(file, fs_constants.X_OK)
-  } catch {
-    await fs.chmod(file, '755')
-    core.debug(`Fixed file permissions (-> 0o755) for ${file}`)
-  }
+  await fs.chmod(file, '755')
+  core.debug(`Fixed file permissions (-> 0o755) for ${file}`)
 }
 
 export async function run(): Promise<void> {
@@ -115,6 +111,7 @@ export async function run(): Promise<void> {
 
     // TODO: Possibly fail if it's other architecture
     let amberFile = tc.find('amber', release.tag_name, 'x64')
+    await handleBadBinaryPermissions(amberFile)
 
     if (!amberFile) {
       const artifact = await tc.downloadTool(release.download_url)

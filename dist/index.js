@@ -127,13 +127,8 @@ function getAmberForMachine(releases) {
 exports.getAmberForMachine = getAmberForMachine;
 function handleBadBinaryPermissions(file) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield fs_1.promises.access(file, fs_1.constants.X_OK);
-        }
-        catch (_a) {
-            yield fs_1.promises.chmod(file, '755');
-            core.debug(`Fixed file permissions (-> 0o755) for ${file}`);
-        }
+        yield fs_1.promises.chmod(file, '755');
+        core.debug(`Fixed file permissions (-> 0o755) for ${file}`);
     });
 }
 function run() {
@@ -154,6 +149,7 @@ function run() {
             }
             // TODO: Possibly fail if it's other architecture
             let amberFile = tc.find('amber', release.tag_name, 'x64');
+            yield handleBadBinaryPermissions(amberFile);
             if (!amberFile) {
                 const artifact = yield tc.downloadTool(release.download_url);
                 core.debug(`Successfully downloaded amber ${release.tag_name}`);
