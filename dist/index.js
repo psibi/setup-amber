@@ -47,10 +47,10 @@ var OS;
     OS[OS["Windows"] = 2] = "Windows";
 })(OS = exports.OS || (exports.OS = {}));
 function associateOs(assetName) {
-    if (assetName.includes("linux")) {
+    if (assetName.includes('linux')) {
         return OS.Linux;
     }
-    else if (assetName.includes("darwin")) {
+    else if (assetName.includes('darwin')) {
         return OS.Mac;
     }
     return OS.Windows;
@@ -63,16 +63,16 @@ function getRelease(tag) {
         try {
             const octokit = new rest_1.Octokit({ auth: process.env.GITHUB_TOKEN });
             const release_info = yield octokit.rest.repos.getReleaseByTag({
-                owner: "fpco",
-                repo: "amber",
-                tag: tag,
+                owner: 'fpco',
+                repo: 'amber',
+                tag
             });
-            const releases = release_info.data.assets.map((x) => ({
+            const releases = release_info.data.assets.map(x => ({
                 asset_id: x.id,
                 name: x.name,
                 os: associateOs(x.name),
                 tag_name: tag,
-                download_url: x.browser_download_url,
+                download_url: x.browser_download_url
             }));
             return releases;
         }
@@ -87,16 +87,16 @@ function getLatestRelease() {
         try {
             const octokit = new rest_1.Octokit({ auth: process.env.GITHUB_TOKEN });
             const release_info = yield octokit.rest.repos.getLatestRelease({
-                owner: "fpco",
-                repo: "amber",
+                owner: 'fpco',
+                repo: 'amber'
             });
-            let version = release_info.data.tag_name;
-            const releases = release_info.data.assets.map((x) => ({
+            const version = release_info.data.tag_name;
+            const releases = release_info.data.assets.map(x => ({
                 asset_id: x.id,
                 name: x.name,
                 os: associateOs(x.name),
                 tag_name: version,
-                download_url: x.browser_download_url,
+                download_url: x.browser_download_url
             }));
             return releases;
         }
@@ -107,18 +107,18 @@ function getLatestRelease() {
 }
 exports.getLatestRelease = getLatestRelease;
 function getAmberForMachine(releases) {
-    if (process.platform === "linux") {
-        let release = releases.filter((r) => r.os === OS.Linux);
+    if (process.platform === 'linux') {
+        const release = releases.filter(r => r.os === OS.Linux);
         if (release.length > 0)
             return release[0];
     }
-    if (process.platform === "win32") {
-        let release = releases.filter((r) => r.os === OS.Windows);
+    if (process.platform === 'win32') {
+        const release = releases.filter(r => r.os === OS.Windows);
         if (release.length > 0)
             return release[0];
     }
-    if (process.platform === "darwin") {
-        let release = releases.filter((r) => r.os === OS.Mac);
+    if (process.platform === 'darwin') {
+        const release = releases.filter(r => r.os === OS.Mac);
         if (release.length > 0)
             return release[0];
     }
@@ -131,7 +131,7 @@ function handleBadBinaryPermissions(file) {
             yield fs_1.promises.access(file, fs_1.constants.X_OK);
         }
         catch (_a) {
-            yield fs_1.promises.chmod(file, "755");
+            yield fs_1.promises.chmod(file, '755');
             core.debug(`Fixed file permissions (-> 0o755) for ${file}`);
         }
     });
@@ -139,7 +139,7 @@ function handleBadBinaryPermissions(file) {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const versionSpec = core.getInput("amber-version");
+            const versionSpec = core.getInput('amber-version');
             let releases;
             if (!versionSpec) {
                 releases = yield getLatestRelease();
@@ -147,24 +147,24 @@ function run() {
             else {
                 releases = yield getRelease(versionSpec);
             }
-            let release = getAmberForMachine(releases);
+            const release = getAmberForMachine(releases);
             if (release === null) {
-                core.setFailed("Installation Failed");
+                core.setFailed('Installation Failed');
                 return;
             }
             // TODO: Possibly fail if it's other architecture
-            let amberFile = tc.find("amber", release.tag_name, "x64");
+            let amberFile = tc.find('amber', release.tag_name, 'x64');
             if (!amberFile) {
                 const artifact = yield tc.downloadTool(release.download_url);
                 core.debug(`Successfully downloaded amber ${release.tag_name}`);
-                amberFile = yield tc.cacheFile(artifact, "amber", "amber", release.tag_name);
+                amberFile = yield tc.cacheFile(artifact, 'amber', 'amber', release.tag_name);
                 yield handleBadBinaryPermissions(artifact);
             }
             core.addPath(amberFile);
             core.info(`Successfully setup amber ${release.tag_name}`);
         }
         catch (error) {
-            core.setFailed("Installation Failed");
+            core.setFailed('Installation Failed');
         }
     });
 }
