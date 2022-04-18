@@ -27,7 +27,7 @@ list available releases. If this happens you can set the `GITHUB_TOKEN`
 environment variable.
 
 ``` yaml
-- uses: extractions/setup-amber@v1
+- uses: psibi/setup-amber@v1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
