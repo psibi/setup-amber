@@ -1,0 +1,9 @@
+name: 'Setup Amber'
+description: 'Install the amber tool'
+author: 'Sibi Prabakaran'
+inputs:
+  amber-version:
+    description: 'A valid semver specifier of the just version to install'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

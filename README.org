@@ -1,0 +1,7 @@
+* setup-amber
+
+Github action to install and cache the [[https://github.com/fpco/amber][amber]] tool.
+
+* Usage
+
+* Development

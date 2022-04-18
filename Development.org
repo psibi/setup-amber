@@ -1,0 +1,6 @@
+* Publishing a test version
+
+npm run package
+git add dist
+git commit
+git push origin
