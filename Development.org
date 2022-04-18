@@ -1,10 +1,12 @@
 * Publishing a test version
 
+#+begin_src sh
 npm run build
 npm run package
 git add dist
 git commit
 git push origin releases/v1
+#+end_src
 
 * References
 
