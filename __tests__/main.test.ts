@@ -13,7 +13,6 @@ import { expect, test } from "@jest/globals";
 
 test("three assets present for amber v0.1.3 version", async () => {
   const release = await getRelease("v0.1.3");
-  console.log("release", release);
   expect(release.length).toBe(3);
 });
 

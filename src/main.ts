@@ -115,7 +115,7 @@ export async function run(): Promise<void> {
     }
 
     // TODO: Possibly fail if it's other architecture
-    const amberFile = tc.find("amber", release.tag_name, "x64");
+    let amberFile = tc.find("amber", release.tag_name, "x64");
 
     if (!amberFile) {
       const artifact = await tc.downloadTool(release.download_url);
