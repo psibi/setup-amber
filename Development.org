@@ -5,3 +5,7 @@ npm run package
 git add dist
 git commit
 git push origin releases/v1
+
+* References
+
+- [[https://github.com/actions/typescript-action][typescript-action repository]]
