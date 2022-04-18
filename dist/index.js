@@ -41,9 +41,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = exports.getAmberForMachine = exports.getLatestRelease = exports.getRelease = exports.associateOs = exports.OS = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
-const path_1 = __importDefault(__nccwpck_require__(5622));
 const fs_1 = __nccwpck_require__(5747);
 const rest_1 = __nccwpck_require__(5375);
+const path_1 = __importDefault(__nccwpck_require__(5622));
 var OS;
 (function (OS) {
     OS[OS["Linux"] = 0] = "Linux";
@@ -155,18 +155,10 @@ function run() {
             let amberFile = tc.find('amber', release.tag_name, 'x64');
             if (!amberFile) {
                 const artifact = yield tc.downloadTool(release.download_url);
-                core.debug(`Successfully downloaded amber ${release.tag_name}`);
+                core.info(`Successfully downloaded amber ${release.tag_name}`);
                 amberFile = yield tc.cacheFile(artifact, 'amber', 'amber', release.tag_name);
-                const amberBinary = path_1.default.join(amberFile, "amber");
-                core.info(`inside if block`);
-                core.info(artifact);
-                core.info(amberFile);
+                const amberBinary = path_1.default.join(amberFile, 'amber');
                 yield handleBadBinaryPermissions(amberBinary);
-            }
-            else {
-                core.info(`inside else block`);
-                core.info(amberFile);
-                yield handleBadBinaryPermissions(amberFile);
             }
             core.addPath(amberFile);
             core.info(`Successfully setup amber ${release.tag_name}`);
