@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as tc from '@actions/tool-cache'
+import path from 'path'
 import {promises as fs, constants as fs_constants} from 'fs'
 import {Octokit} from '@octokit/rest'
 
@@ -121,9 +122,12 @@ export async function run(): Promise<void> {
         'amber',
         release.tag_name
       )
+      amberFile = path.join(amberFile, "amber");
       core.info(`inside if block`)
       core.info(artifact);
-      await handleBadBinaryPermissions(artifact)
+      core.info(amberFile);
+
+      await handleBadBinaryPermissions(amberFile)
     } else {
       core.info(`inside else block`)
       await handleBadBinaryPermissions(amberFile)

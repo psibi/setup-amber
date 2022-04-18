@@ -34,10 +34,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = exports.getAmberForMachine = exports.getLatestRelease = exports.getRelease = exports.associateOs = exports.OS = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
+const path_1 = __importDefault(__nccwpck_require__(5622));
 const fs_1 = __nccwpck_require__(5747);
 const rest_1 = __nccwpck_require__(5375);
 var OS;
@@ -153,9 +157,11 @@ function run() {
                 const artifact = yield tc.downloadTool(release.download_url);
                 core.debug(`Successfully downloaded amber ${release.tag_name}`);
                 amberFile = yield tc.cacheFile(artifact, 'amber', 'amber', release.tag_name);
+                amberFile = path_1.default.join(amberFile, "amber");
                 core.info(`inside if block`);
                 core.info(artifact);
-                yield handleBadBinaryPermissions(artifact);
+                core.info(amberFile);
+                yield handleBadBinaryPermissions(amberFile);
             }
             else {
                 core.info(`inside else block`);
