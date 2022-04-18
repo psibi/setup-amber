@@ -1,6 +1,9 @@
 name: 'Setup Amber'
 description: 'Install the amber tool'
 author: 'Sibi Prabakaran'
+branding:
+  icon: 'anchor'
+  color: 'blue'
 inputs:
   amber-version:
     description: 'A valid semver specifier of the amber version to install'
