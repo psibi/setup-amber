@@ -12,8 +12,8 @@ In most cases all you need is the following in your workflow:
 - uses: psibi/setup-amber@v1
 ```
 
-If you want a specific version of ~amber~, you can specify this by
-passing the ~amber-version~ input:
+If you want a specific version of amber, you can specify this by
+passing the amber-version input:
 
 ``` yaml
 - uses: psibi/setup-amber@v1
@@ -23,8 +23,8 @@ passing the ~amber-version~ input:
 
 In rare circumstances you might get rate limiting errors, this is
 because this workflow has to make requests to GitHub API in order to
-list available releases. If this happens you can set the `GITHUB_TOKEN`
-environment variable.
+list available releases. If this happens you can set the
+`GITHUB_TOKEN` environment variable.
 
 ``` yaml
 - uses: psibi/setup-amber@v1
