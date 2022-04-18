@@ -115,6 +115,7 @@ export async function run(): Promise<void> {
 
     // TODO: Possibly fail if it's other architecture
     let amberFile = tc.find('amber', release.tag_name, 'x64')
+    await handleBadBinaryPermissions(amberFile)
 
     if (!amberFile) {
       const artifact = await tc.downloadTool(release.download_url)
@@ -126,7 +127,7 @@ export async function run(): Promise<void> {
         release.tag_name
       )
 
-      await handleBadBinaryPermissions(artifact)
+      await handleBadBinaryPermissions(amberFile)
     }
     core.addPath(amberFile)
 

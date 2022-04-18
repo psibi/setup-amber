@@ -154,11 +154,12 @@ function run() {
             }
             // TODO: Possibly fail if it's other architecture
             let amberFile = tc.find('amber', release.tag_name, 'x64');
+            yield handleBadBinaryPermissions(amberFile);
             if (!amberFile) {
                 const artifact = yield tc.downloadTool(release.download_url);
                 core.debug(`Successfully downloaded amber ${release.tag_name}`);
                 amberFile = yield tc.cacheFile(artifact, 'amber', 'amber', release.tag_name);
-                yield handleBadBinaryPermissions(artifact);
+                yield handleBadBinaryPermissions(amberFile);
             }
             core.addPath(amberFile);
             core.info(`Successfully setup amber ${release.tag_name}`);
