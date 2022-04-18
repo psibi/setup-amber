@@ -1,5 +1,7 @@
 # setup-amber
 
+[![Github CI](https://github.com/psibi/setup-amber/actions/workflows/test.yml/badge.svg)](https://github.com/psibi/setup-amber/actions/workflows/test.yml)
+
 Github action to install and cache the [[https://github.com/fpco/amber][amber]] tool.
 
 # Usage
