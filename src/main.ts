@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as tc from '@actions/tool-cache'
-import path from 'path'
-import {promises as fs, constants as fs_constants} from 'fs'
+import {promises as fs} from 'fs'
 import {Octokit} from '@octokit/rest'
+import path from 'path'
 
 export enum OS {
   Linux,
@@ -115,26 +115,17 @@ export async function run(): Promise<void> {
 
     if (!amberFile) {
       const artifact = await tc.downloadTool(release.download_url)
-      core.debug(`Successfully downloaded amber ${release.tag_name}`)
+      core.info(`Successfully downloaded amber ${release.tag_name}`)
       amberFile = await tc.cacheFile(
         artifact,
         'amber',
         'amber',
         release.tag_name
       )
-      const amberBinary = path.join(amberFile, "amber");
-      core.info(`inside if block`)
-      core.info(artifact);
-      core.info(amberFile);
-
+      const amberBinary = path.join(amberFile, 'amber')
       await handleBadBinaryPermissions(amberBinary)
-    } else {
-      core.info(`inside else block`)
-      core.info(amberFile)
-      await handleBadBinaryPermissions(amberFile)
     }
     core.addPath(amberFile)
-
     core.info(`Successfully setup amber ${release.tag_name}`)
   } catch (error: unknown) {
     core.info((error as Error).message)
