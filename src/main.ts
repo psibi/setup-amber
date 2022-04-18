@@ -129,7 +129,8 @@ export async function run(): Promise<void> {
     core.addPath(amberFile)
 
     core.info(`Successfully setup amber ${release.tag_name}`)
-  } catch (error) {
+  } catch (error: unknown) {
+    core.info((error as Error).message)
     core.setFailed('Installation Failed')
   }
 }

@@ -161,6 +161,7 @@ function run() {
             core.info(`Successfully setup amber ${release.tag_name}`);
         }
         catch (error) {
+            core.info(error.message);
             core.setFailed('Installation Failed');
         }
     });
