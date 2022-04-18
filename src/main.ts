@@ -122,14 +122,15 @@ export async function run(): Promise<void> {
         'amber',
         release.tag_name
       )
-      amberFile = path.join(amberFile, "amber");
+      const amberBinary = path.join(amberFile, "amber");
       core.info(`inside if block`)
       core.info(artifact);
       core.info(amberFile);
 
-      await handleBadBinaryPermissions(amberFile)
+      await handleBadBinaryPermissions(amberBinary)
     } else {
       core.info(`inside else block`)
+      core.info(amberFile)
       await handleBadBinaryPermissions(amberFile)
     }
     core.addPath(amberFile)

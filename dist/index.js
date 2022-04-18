@@ -157,14 +157,15 @@ function run() {
                 const artifact = yield tc.downloadTool(release.download_url);
                 core.debug(`Successfully downloaded amber ${release.tag_name}`);
                 amberFile = yield tc.cacheFile(artifact, 'amber', 'amber', release.tag_name);
-                amberFile = path_1.default.join(amberFile, "amber");
+                const amberBinary = path_1.default.join(amberFile, "amber");
                 core.info(`inside if block`);
                 core.info(artifact);
                 core.info(amberFile);
-                yield handleBadBinaryPermissions(amberFile);
+                yield handleBadBinaryPermissions(amberBinary);
             }
             else {
                 core.info(`inside else block`);
+                core.info(amberFile);
                 yield handleBadBinaryPermissions(amberFile);
             }
             core.addPath(amberFile);
