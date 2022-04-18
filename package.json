@@ -1,21 +1,22 @@
 {
-  "name": "typescript-action",
+  "name": "setup-amber",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Setup amber and cache it",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
+    "lint-fix": "eslint --fix src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/psibi/setup-amber.git"
   },
   "keywords": [
     "actions",
