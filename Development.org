@@ -1,6 +1,7 @@
 * Publishing a test version
 
+npm run build
 npm run package
 git add dist
 git commit
-git push origin
+git push origin releases/v1
