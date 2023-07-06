@@ -5,8 +5,25 @@ npm run build
 npm run package
 git add dist
 git commit
-git push origin releases/v1
+git push origin releases/v1.1
 #+end_src
+
+* Update dependencies
+
+[[https://stackoverflow.com/a/16074029][Basically this]] step but we do it via nix-shell:
+
+#+begin_src sh
+ncu -u
+npm install
+#+end_src
+
+And you can finally confirm too that this command doesn't produce any
+output:
+
+#+begin_src sh
+❯ npm outdated
+#+end_src
+
 
 * References
 
