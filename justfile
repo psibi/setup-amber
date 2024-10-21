@@ -8,7 +8,7 @@ release-branch:
     npm run package
     git add dist
     git commit -m "Upgrade"
-    git push origin releases/v1.1
+    git push origin releases/v1.2
 
 # Build and package
 build-package:
