@@ -8,5 +8,5 @@ inputs:
   amber-version:
     description: 'A valid semver specifier of the amber version to install'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
