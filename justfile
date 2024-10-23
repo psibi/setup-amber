@@ -2,7 +2,7 @@
 default:
     just --list --unsorted
 
-# Publish dist to releases/v1.1
+# Publish dist to releases/v1.2
 release-branch:
     npm run build
     npm run package
