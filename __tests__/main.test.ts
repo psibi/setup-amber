@@ -3,13 +3,9 @@ import {
   getLatestRelease,
   OS,
   associateOs,
-  getAmberForMachine,
-  Release
+  getAmberForMachine
 } from '../src/main'
-import * as process from 'process'
-import * as cp from 'child_process'
-import * as path from 'path'
-import {expect, test} from '@jest/globals'
+import {expect, test} from 'vitest'
 
 test('three assets present for amber v0.1.3 version', async () => {
   const release = await getRelease('v0.1.3')
