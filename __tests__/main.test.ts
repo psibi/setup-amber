@@ -3,9 +3,9 @@ import {
   getLatestRelease,
   OS,
   associateOs,
-  getAmberForMachine,
+  getAmberForMachine
 } from '../src/main'
-import { expect, test } from 'vitest'
+import {expect, test} from 'vitest'
 
 test('three assets present for amber v0.1.3 version', async () => {
   const release = await getRelease('v0.1.3')
