@@ -9,14 +9,14 @@ GitHub action to install and cache the [amber](https://github.com/fpco/amber) to
 In most cases all you need is the following in your workflow:
 
 ``` yaml
-- uses: psibi/setup-amber@v1.2
+- uses: psibi/setup-amber@v2.0.0
 ```
 
 If you want a specific version of amber, you can specify this by
 passing the amber-version input:
 
 ``` yaml
-- uses: psibi/setup-amber@v1.2
+- uses: psibi/setup-amber@v2.0.0
   with:
     amber-version: 'v0.1.3'
 ```
@@ -27,7 +27,7 @@ list available releases. If this happens you can set the
 `GITHUB_TOKEN` environment variable.
 
 ``` yaml
-- uses: psibi/setup-amber@v1.2
+- uses: psibi/setup-amber@v2.0.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
